@@ -1,7 +1,8 @@
 import Foundation
+import PacketStream
 import SwiftPCAP
 
-public class CaptureDevice
+public class CaptureDevice: PacketStream
 {
     let pcap: SwiftPCAP.Base
 

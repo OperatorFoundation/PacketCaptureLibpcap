@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import PacketStream
 import SwiftPCAP
 
-public class PcapFile
+public class PcapFile: PacketStream
 {
     let pcap: SwiftPCAP.Base
 
