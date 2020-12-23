@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftHexTools",
+        "repositoryURL": "https://github.com/OperatorFoundation/SwiftHexTools",
+        "state": {
+          "branch": null,
+          "revision": "4ce4a4f66eea05c900d447af8c07ecaac720716c",
+          "version": "1.2.2"
+        }
+      },
+      {
+        "package": "SwiftPCAP",
+        "repositoryURL": "https://github.com/OperatorFoundation/SwiftPCAP.git",
+        "state": {
+          "branch": null,
+          "revision": "4ac0911d2f3d5611baa9c8a4ba56e4841c90ebb4",
+          "version": "1.1.8"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
