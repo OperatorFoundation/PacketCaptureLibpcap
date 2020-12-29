@@ -8,8 +8,16 @@ public class CaptureDevice: PacketStream
 
     public init?(interface: String)
     {
-        guard let live = try? SwiftPCAP.Live(interface: interface) else {return nil}
-        self.pcap = live
+        do
+        {
+            let live = try SwiftPCAP.Live(interface: interface)
+            self.pcap = live
+        }
+        catch (let liveError)
+        {
+            print("Error opening the capture device: \(liveError)")
+            return nil
+        }
     }
 
     public func nextPacket() -> (Date, Data)
