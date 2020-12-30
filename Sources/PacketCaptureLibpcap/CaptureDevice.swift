@@ -19,12 +19,16 @@ public class CaptureDevice: PacketStream
 
     public func startCapture() throws
     {
-        guard let live = try? SwiftPCAP.Live(interface: interface) else
+        do
         {
-            throw CaptureDeviceError.openFailed
+            let live = try SwiftPCAP.Live(interface: interface)
+            self.pcap = live
         }
-
-        self.pcap = live
+        catch (let liveError)
+        {
+            print("Error opening the capture device: \(liveError)")
+            throw liveError
+        }
     }
 
     public func nextCaptureResult() -> CaptureResult?
