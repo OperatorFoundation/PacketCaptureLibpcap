@@ -9,18 +9,35 @@ import Foundation
 import PacketStream
 import SwiftPCAP
 
+public enum PcapFileError: Error
+{
+    case openFailed
+}
+
 public class PcapFile: PacketStream
 {
-    let pcap: SwiftPCAP.Base
+    let path: String
+    var pcap: SwiftPCAP.Base?
 
     public init?(path: String)
     {
-        guard let live = try? SwiftPCAP.Offline(path: path) else {return nil}
+        self.path = path
+    }
+
+    public func startCapture() throws
+    {
+        guard let live = try? SwiftPCAP.Offline(path: path) else
+        {
+            throw PcapFileError.openFailed
+        }
+
         self.pcap = live
     }
 
-    public func nextPacket() -> (Date, Data)
+    public func nextCaptureResult() -> CaptureResult?
     {
+        guard let pcap = self.pcap else {return nil}
+        
         let bytes = pcap.nextPacket()
         let data = Data(bytes)
 
@@ -31,6 +48,12 @@ public class PcapFile: PacketStream
         let totalSeconds = totalMicroSecs / 1000000
         let date = Date(timeIntervalSince1970: TimeInterval(totalSeconds))
 
-        return (date, data)
+        return CaptureResult(packets: [TimestampedPacket(timestamp: date, payload: data)], dropped: 0)
+    }
+
+    public func stopCapture() throws
+    {
+        // FIXME - Figure out how to close libpcap device
+        self.pcap = nil
     }
 }
