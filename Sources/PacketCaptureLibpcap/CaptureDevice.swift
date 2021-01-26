@@ -50,7 +50,7 @@ public class CaptureDevice: PacketStream
 
     public func stopCapture() throws
     {
-        // FIXME - Figure out how to close libpcap device
+        self.pcap?.close()
         self.pcap = nil
     }
 }
