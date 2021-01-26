@@ -34,9 +34,7 @@ public class CaptureDevice: PacketStream
     public func nextCaptureResult() -> CaptureResult?
     {
         guard let pcap = self.pcap else {return nil}
-        
-        let bytes = pcap.nextPacket()
-        let data = Data(bytes)
+        guard let data = pcap.nextPacket() else {return nil}
 
         let timestamp = pcap.currentHeader.ts
         let seconds = UInt64(timestamp.tv_sec) //convert seconds to microsecs

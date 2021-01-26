@@ -37,9 +37,7 @@ public class PcapFile: PacketStream
     public func nextCaptureResult() -> CaptureResult?
     {
         guard let pcap = self.pcap else {return nil}
-        
-        let bytes = pcap.nextPacket()
-        let data = Data(bytes)
+        guard let data = pcap.nextPacket() else {return nil}
 
         let timestamp = pcap.currentHeader.ts
         let seconds = UInt64(timestamp.tv_sec) //convert seconds to microsecs
@@ -53,7 +51,7 @@ public class PcapFile: PacketStream
 
     public func stopCapture() throws
     {
-        // FIXME - Figure out how to close libpcap device
+        self.pcap?.close()
         self.pcap = nil
     }
 }

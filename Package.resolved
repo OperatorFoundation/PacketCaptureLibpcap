@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/OperatorFoundation/SwiftPCAP.git",
         "state": {
           "branch": null,
-          "revision": "e71fb2657893ce74811105d558746f412ff8c2a4",
-          "version": "1.1.11"
+          "revision": "857ce5855062cf86361ba19946a8898834ad087a",
+          "version": "1.2.0"
         }
       }
     ]
