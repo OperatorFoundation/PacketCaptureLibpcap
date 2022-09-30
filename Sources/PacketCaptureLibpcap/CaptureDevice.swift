@@ -40,7 +40,7 @@ public class CaptureDevice: PacketStream
         let seconds = UInt64(timestamp.tv_sec) //convert seconds to microsecs
         let microSecs = UInt64(timestamp.tv_usec)
         let totalMicroSecs = seconds * UInt64(1e6) + microSecs
-        let totalSeconds = totalMicroSecs / 1000000
+        let totalSeconds: Double = Double(totalMicroSecs) / 1000000
         let date = Date(timeIntervalSince1970: TimeInterval(totalSeconds))
 
         return CaptureResult(packets: [TimestampedPacket(timestamp: date, payload: data)], dropped: 0)
